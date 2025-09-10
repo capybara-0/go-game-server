@@ -1,3 +1,21 @@
+echo "--- GIT PULL ORIGIN ---"
+
+sleep 1
+
+git pull origin
+
+sleep 3
+
+echo "--- RELOAD DAEMON AND RESTART MASTER SERVER"
 sudo systemctl daemon-reload
 sudo systemctl restart masterserver.service
+echo "--- cat /etc/systemd/system/masterserver.service ---"
+sleep 1
+
 cat /etc/systemd/system/masterserver.service
+
+
+echo "--- MASTER SERVER IS RUNNING ---"
+echo "--- journalctl -f -u masterserver.service ---"
+journalctl -f -u masterserver.service
+
