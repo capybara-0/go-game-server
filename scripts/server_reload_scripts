@@ -4,12 +4,19 @@ sleep 1
 
 git pull origin
 
-sleep 3
+echo "--- PULL DOCKER LATEST DOCKER IMAGE ---"
+docker pull yolohola3/gd-dedicate-server-image 
+
+echo "--- CLEAN UP UNTAGGED IMAGES ---"
+docker image prune -f
+
+sleep 2
 
 echo "--- RELOAD DAEMON AND RESTART MASTER SERVER"
 sudo systemctl daemon-reload
 sudo systemctl restart masterserver.service
 echo "--- cat /etc/systemd/system/masterserver.service ---"
+
 sleep 1
 
 cat /etc/systemd/system/masterserver.service
@@ -18,4 +25,3 @@ cat /etc/systemd/system/masterserver.service
 echo "--- MASTER SERVER IS RUNNING ---"
 echo "--- journalctl -f -u masterserver.service ---"
 journalctl -f -u masterserver.service
-
